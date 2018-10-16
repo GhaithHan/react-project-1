@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ExpenseList from expenses 1`] = `<div />`;
+
+exports[`should render ExpenseList with empty messsage 1`] = `
+<div>
+  <p>
+    No Expenses
+  </p>
+</div>
+`;
