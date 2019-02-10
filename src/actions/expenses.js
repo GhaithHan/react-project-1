@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import database from '../firebase/firebase'
+import database from '../firebase/firebase';
 
 
 // ADD EXPENSE
@@ -24,9 +24,9 @@ export const startAddExpense = (expenseData = {}) => {
         id: ref.key,
         ...expense
       }));
-    })
-  }
-}
+    });
+  };
+};
 
 // REMOVE EXPENSE 
 export const removeExpense = (
@@ -45,4 +45,26 @@ export const editExpense = (id, updates) => ({
    updates
  });
 
+ // SET_EXPENSES
+ export const setExpenses = (expenses) => ({
+   type: 'SET_EXPENSES',
+   expenses
+ });
+
+ export const startSetExpenses = () => {
+  return (dispatch) => {
+   return database.ref('expenses').once('value').then((snapshot) => {
+      const expenses = [];
+ 
+      snapshot.forEach((childSnapshot) => {
+        expenses.push({
+           id: childSnapshot.key,
+           ...childSnapshot.val()
+        });
+      });
+
+      dispatch(setExpenses(expenses));
+    });
+  }; 
+ };
  
